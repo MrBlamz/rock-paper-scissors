@@ -1,6 +1,7 @@
 const HANDS = ["Rock", "Paper", "Scissors"];
 
 function computerPlay() {
+  // Get a random computer hand //
   return HANDS[Math.round(Math.random() * 2)];
 }
 
@@ -40,31 +41,80 @@ function playerPlay() {
   return hand;
 }
 
+// Plays a single round - Returns the winner (String) //
 function round(playerSelection, computerSelection) {
   switch (playerSelection) {
     case "Rock":
       if (computerSelection === "Rock") {
-        return "This round ended in a tie!";
+        return "Tie";
       } else if (computerSelection === "Paper") {
-        return "You lose! Paper beats Rock";
+        return "Computer";
       } else {
-        return "You win! Rock beats Scissors";
+        return "Player";
       }
     case "Paper":
       if (computerSelection === "Rock") {
-        return "You win! Paper beats Rock";
+        return "Player";
       } else if (computerSelection === "Paper") {
-        return "This round ended in a tie!";
+        return "Tie";
       } else {
-        return "You lose! Scissors beats Paper";
+        return "Computer";
       }
     case "Scissors":
       if (computerSelection === "Rock") {
-        return "You lose! Rock beats Scissors";
+        return "Computer";
       } else if (computerSelection === "Paper") {
-        return "You win! Scissors beats Paper";
+        return "Player";
       } else {
-        return "This round ended in a tie!";
+        return "Tie";
       }
   }
 }
+
+// Function that runs the entire game //
+function game() {
+  let currentRound = 1;
+  let playerScore = 0;
+  let computerScore = 0;
+
+  while (currentRound <= 5) {
+    console.log(`Round: ${currentRound}`);
+
+    let playerHand = playerPlay();
+    let computerHand = computerPlay();
+
+    roundWinner = round(playerHand, computerHand);
+
+    console.log(`${playerHand} vs ${computerHand}`);
+
+    switch (roundWinner) {
+      case "Computer":
+        computerScore++;
+        console.log("Computer won this round!");
+        break;
+      case "Player":
+        playerScore++;
+        console.log("Player won this round!");
+        break;
+      default:
+        console.log("This round ended in a tie!");
+        break;
+    }
+
+    console.log(`Player: ${playerScore} : Computer: ${computerScore}`);
+    currentRound++;
+  }
+
+  // Returns the game winner (String) //
+  function gameWinner() {
+    return playerScore > computerScore
+      ? "Player wins the game!"
+      : computerScore > playerScore
+      ? "Computer wins the game!"
+      : "The game ended in a Tie!";
+  }
+
+  console.log(gameWinner());
+}
+
+game();
