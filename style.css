@@ -1,0 +1,244 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300&display=swap");
+
+body {
+  font-family: Roboto;
+  background: #262730;
+  overflow: hidden;
+}
+
+#menu {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #d33f49;
+}
+
+#menu #title {
+  font-size: 60px;
+  padding: 5vh;
+  margin-bottom: 10vh;
+  transition: all 1s;
+}
+
+#menu #title:hover {
+  color: #eff0d1;
+  transform: scale(1.1);
+}
+
+#menu #start-btn {
+  font-family: Roboto;
+  font-size: 30px;
+  width: 10%;
+  height: 10%;
+  border-radius: 10px;
+  border: 1px solid #eff0d1;
+  background-color: #d33f49;
+  color: #eff0d1;
+  padding: 5px;
+  transition: all 1s;
+}
+
+#menu #start-btn:hover {
+  background-color: #eff0d1;
+  color: #d33f49;
+  border: 1px solid #d33f49;
+  transform: scale(1.1);
+}
+
+#game-container {
+  display: none;
+  justify-content: space-evenly;
+  height: 90vh;
+}
+
+#players-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5vh;
+}
+
+.player-info .avatar {
+  padding: 10px;
+  width: 100px;
+}
+
+.player-info .score-container {
+  display: flex;
+  font-size: 40px;
+  padding: 5px;
+  color: #eff0d1;
+}
+
+.player-info .score-container .points {
+  margin-left: 10px;
+  color: #d33f49;
+}
+
+.hands {
+  display: flex;
+  text-align: center;
+  margin: 10px;
+  padding: 5px;
+  border: 3px solid #d33f49;
+  border-radius: 5px;
+}
+
+.hands .hand {
+  padding: 10px;
+  color: #d33f49;
+  font-size: 20px;
+  font-weight: 900;
+  border: 3px solid #eff0d1;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.hands .hand:hover {
+  color: #eff0d1;
+}
+
+.hands .hand:hover {
+  background-color: #d33f49;
+}
+
+.hands #player-rock {
+  background-image: url(assets/images/rock.png);
+  height: 154px;
+  width: 154px;
+}
+
+.hands #player-rock-container:hover #player-rock {
+  background-image: url(assets/images/rock-open.png);
+}
+
+.hands #player-paper {
+  background-image: url(assets/images/paper.png);
+  height: 154px;
+  width: 154px;
+}
+
+.hands #player-paper-container:hover #player-paper {
+  background-image: url(assets/images/paper-open.png);
+}
+
+.hands #player-scissors {
+  background-image: url(assets/images/scissors.png);
+  height: 154px;
+  width: 154px;
+}
+
+.hands #player-scissors-container:hover #player-scissors {
+  background-image: url(assets/images/scissors-open.png);
+}
+
+.hands #computer-rock {
+  background-image: url(assets/images/rock.png);
+  transform: rotateY(180deg);
+  height: 154px;
+  width: 154px;
+}
+
+.hands #computer-rock-container:hover #computer-rock {
+  background-image: url(assets/images/rock-open.png);
+}
+
+.hands #computer-paper {
+  background-image: url(assets/images/paper.png);
+  transform: rotateY(180deg);
+  height: 154px;
+  width: 154px;
+}
+
+.hands #computer-paper-container:hover #computer-paper {
+  background-image: url(assets/images/paper-open.png);
+}
+
+.hands #computer-scissors {
+  background-image: url(assets/images/scissors.png);
+  transform: rotateY(180deg);
+  height: 154px;
+  width: 154px;
+}
+
+.hands #computer-scissors-container:hover #computer-scissors {
+  background-image: url(assets/images/scissors-open.png);
+}
+
+#results-container {
+  width: 100%;
+  text-align: center;
+  font-size: 50px;
+  display: none;
+}
+
+#audio-container {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+#audio-container {
+  text-align: end;
+}
+
+#audio-container #audio-controls {
+  color: #eff0d1;
+}
+
+#audio-container #audio-controls:hover {
+  color: #d33f49;
+}
+
+#audio-container #audio-controls svg {
+  padding: 0 10px 5px 0;
+}
+
+#audio-container #audio-controls #audio-muted {
+  display: none;
+}
+
+.disabled {
+  animation-name: fade-out;
+  animation-duration: 1.5s;
+}
+
+.enabled {
+  display: flex !important;
+  animation-name: fade-in;
+  animation-duration: 2s;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

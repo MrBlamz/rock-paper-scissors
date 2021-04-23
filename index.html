@@ -9,6 +9,131 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div id="main-container">
+      <div class="enabled" id="menu">
+        <h1 id="title">Rock Paper Scissors</h1>
+        <button id="start-btn">Play</button>
+      </div>
+      <div class="disabled" id="game-container">
+        <div id="players-container">
+          <div class="player" id="human">
+            <div class="player-info" id="human-info">
+              <img
+                class="avatar"
+                id="human-avatar"
+                src="assets/images/human.png"
+                alt="human avatar"
+              />
+              <div class="score-container">
+                <p class="score" id="human-score">Score:</p>
+                <p class="points" id="human-points">0</p>
+              </div>
+            </div>
+            <div class="hands" id="human-hands">
+              <div class="hand" id="player-rock-container">
+                <p>ROCK</p>
+                <div id="player-rock"></div>
+              </div>
+              <div class="hand" id="player-paper-container">
+                <p>PAPER</p>
+                <div id="player-paper"></div>
+              </div>
+              <div class="hand" id="player-scissors-container">
+                <p>SCISSORS</p>
+                <div id="player-scissors"></div>
+              </div>
+            </div>
+          </div>
+          <div class="player" id="computer-stats">
+            <div class="player-info" id="computer-info">
+              <img
+                class="avatar"
+                id="computer-avatar"
+                src="assets/images/computer.png"
+                alt="computer avatar"
+              />
+              <div class="score-container">
+                <p class="score" id="computer-score">Score:</p>
+                <p class="points" id="computer-points">0</p>
+              </div>
+            </div>
+            <div class="hands" id="computer-hands">
+              <div class="hand" id="computer-rock-container">
+                <p>ROCK</p>
+                <div id="computer-rock"></div>
+              </div>
+              <div class="hand" id="computer-paper-container">
+                <p>PAPER</p>
+                <div id="computer-paper"></div>
+              </div>
+              <div class="hand" id="computer-scissors-container">
+                <p>SCISSORS</p>
+                <div id="computer-scissors"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="results-container">
+        <p id="winner">Winner</p>
+      </div>
+      <div id="audio-container">
+        <audio autoplay loop>
+          <source src="assets/audio/audio1.wav" type="audio/ogg" />
+          Your browser does not support the audio element.
+        </audio>
+        <a href="#" id="audio-controls">
+          <svg
+            id="audio-playing"
+            xmlns="http://www.w3.org/2000/svg"
+            version="1.0"
+            width="50"
+            height="50"
+            viewBox="0 0 75 75"
+          >
+            <path
+              d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z"
+              style="
+                stroke: currentColor;
+                stroke-width: 5;
+                stroke-linejoin: round;
+                fill: currentColor;
+              "
+            />
+            <path
+              d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6"
+              style="
+                fill: none;
+                stroke: currentColor;
+                stroke-width: 5;
+                stroke-linecap: round;
+              "
+            />
+          </svg>
+          <svg
+            id="audio-muted"
+            xmlns="http://www.w3.org/2000/svg"
+            version="1.0"
+            width="50"
+            height="50"
+            viewBox="0 0 75 75"
+            stroke="currentColor"
+            stroke-width="5"
+          >
+            <path
+              d="m39,14-17,15H6V48H22l17,15z"
+              fill="currentColor"
+              stroke-linejoin="round"
+            />
+            <path
+              d="m49,26 20,24m0-24-20,24"
+              fill="none"
+              stroke-linecap="round"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
     <script src="./app.js"></script>
   </body>
 </html>
