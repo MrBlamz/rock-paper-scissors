@@ -1,5 +1,29 @@
 // UI VERSION //
 
+function startGame() {
+  const menu = document.getElementById("menu");
+  const startBtn = document.getElementById("start-btn");
+  const gameContainer = document.getElementById("game-container");
+
+  function changeClass(element, remove, add) {
+    element.classList.remove(remove);
+    element.classList.add(add);
+  }
+
+  startBtn.addEventListener("click", () => {
+    // Toggle fade out animation on menu
+    changeClass(menu, "enabled", "disabled");
+
+    // Wait for animation to end
+    setTimeout(() => {
+      // Hide menu
+      menu.style.display = "none";
+      // Toggle fade in animation on game container
+      changeClass(gameContainer, "disabled", "enabled");
+    }, 1500);
+  });
+}
+
 function controlAudio() {
   const audio = document.querySelector("audio");
   const btn = document.getElementById("audio-controls");
@@ -156,4 +180,5 @@ function game() {
   console.log(gameWinner());
 }
 
+startGame();
 controlAudio();
