@@ -108,11 +108,8 @@ body {
   margin: 5px;
 }
 
-.hands .hand:hover {
+.hands#player-hands .hand:hover {
   color: #eff0d1;
-}
-
-.hands .hand:hover {
   background-color: #d33f49;
 }
 
@@ -153,10 +150,6 @@ body {
   width: 154px;
 }
 
-.hands #computer-rock-container:hover #computer-rock {
-  background-image: url(assets/images/rock-open.png);
-}
-
 .hands #computer-paper {
   background-image: url(assets/images/paper.png);
   transform: rotateY(180deg);
@@ -164,19 +157,11 @@ body {
   width: 154px;
 }
 
-.hands #computer-paper-container:hover #computer-paper {
-  background-image: url(assets/images/paper-open.png);
-}
-
 .hands #computer-scissors {
   background-image: url(assets/images/scissors.png);
   transform: rotateY(180deg);
   height: 154px;
   width: 154px;
-}
-
-.hands #computer-scissors-container:hover #computer-scissors {
-  background-image: url(assets/images/scissors-open.png);
 }
 
 #results-container {
