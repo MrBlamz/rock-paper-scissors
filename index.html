@@ -7,6 +7,11 @@
     <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="shortcut icon"
+      href="assets/images/favicon.png"
+      type="image/x-icon"
+    />
   </head>
   <body>
     <div id="main-container">
@@ -25,20 +30,20 @@
                 alt="human avatar"
               />
               <div class="score-container">
-                <p class="score" id="human-score">Score:</p>
-                <p class="points" id="human-points">0</p>
+                <p class="score" id="player-score">Score:</p>
+                <p class="points" id="player-points">0</p>
               </div>
             </div>
             <div class="hands" id="player-hands">
-              <div class="hand" id="player-rock-container">
+              <div class="hand rock" id="player-rock-container">
                 <p>ROCK</p>
                 <div id="player-rock"></div>
               </div>
-              <div class="hand" id="player-paper-container">
+              <div class="hand paper" id="player-paper-container">
                 <p>PAPER</p>
                 <div id="player-paper"></div>
               </div>
-              <div class="hand" id="player-scissors-container">
+              <div class="hand scissors" id="player-scissors-container">
                 <p>SCISSORS</p>
                 <div id="player-scissors"></div>
               </div>
@@ -58,15 +63,15 @@
               </div>
             </div>
             <div class="hands" id="computer-hands">
-              <div class="hand" id="computer-rock-container">
+              <div class="hand rock" id="computer-rock-container">
                 <p>ROCK</p>
                 <div id="computer-rock"></div>
               </div>
-              <div class="hand" id="computer-paper-container">
+              <div class="hand paper" id="computer-paper-container">
                 <p>PAPER</p>
                 <div id="computer-paper"></div>
               </div>
-              <div class="hand" id="computer-scissors-container">
+              <div class="hand scissors" id="computer-scissors-container">
                 <p>SCISSORS</p>
                 <div id="computer-scissors"></div>
               </div>
@@ -75,11 +80,12 @@
         </div>
       </div>
       <div id="results-container">
-        <p id="winner">Winner</p>
+        <p>Winner:</p>
+        <p id="winner"></p>
       </div>
       <div id="audio-container">
         <audio autoplay loop>
-          <source src="assets/audio/audio1.wav" type="audio/ogg" />
+          <source src="assets/audio/audio2.wav" type="audio/ogg" />
           Your browser does not support the audio element.
         </audio>
         <a href="#" id="audio-controls">

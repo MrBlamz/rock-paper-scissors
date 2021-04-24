@@ -28,20 +28,18 @@ body {
   transform: scale(1.1);
 }
 
-#menu #start-btn {
+button {
   font-family: Roboto;
   font-size: 30px;
-  width: 10%;
-  height: 10%;
   border-radius: 10px;
   border: 1px solid #eff0d1;
   background-color: #d33f49;
   color: #eff0d1;
-  padding: 5px;
+  padding: 10px 20px;
   transition: all 1s;
 }
 
-#menu #start-btn:hover {
+button:hover {
   background-color: #eff0d1;
   color: #d33f49;
   border: 1px solid #d33f49;
@@ -166,9 +164,15 @@ body {
 
 #results-container {
   width: 100%;
-  text-align: center;
   font-size: 50px;
   display: none;
+  justify-content: center;
+  color: #eff0d1;
+}
+
+#results-container #winner {
+  color: #d33f49;
+  margin-left: 10px;
 }
 
 #audio-container {
