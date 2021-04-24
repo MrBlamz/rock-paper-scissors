@@ -1,3 +1,42 @@
+// UI VERSION //
+
+function controlAudio() {
+  const audio = document.querySelector("audio");
+  const btn = document.getElementById("audio-controls");
+  const playingIcon = document.getElementById("audio-playing");
+  const mutedIcon = document.getElementById("audio-muted");
+  let isPlaying = true;
+
+  function changeIcon(iconToHide, iconToDisplay) {
+    iconToHide.style.display = "none";
+    iconToDisplay.style.display = "inline";
+  }
+
+  function togglePlay() {
+    if (isPlaying) {
+      audio.pause();
+      changeIcon(playingIcon, mutedIcon);
+    } else {
+      audio.play();
+      changeIcon(mutedIcon, playingIcon);
+    }
+  }
+
+  audio.onplaying = () => {
+    isPlaying = true;
+  };
+
+  audio.onpause = () => {
+    isPlaying = false;
+  };
+
+  // Set default volume
+  audio.volume = 0.5;
+
+  btn.addEventListener("click", togglePlay);
+}
+
+// CONSOLE VERSION //
 const HANDS = ["Rock", "Paper", "Scissors"];
 
 function computerPlay() {
@@ -117,4 +156,4 @@ function game() {
   console.log(gameWinner());
 }
 
-game();
+controlAudio();
