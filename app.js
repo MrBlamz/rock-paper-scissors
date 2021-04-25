@@ -175,7 +175,8 @@ function playGame() {
         container.style.justifyContent = "center";
         container.style.alignItems = "center";
         container.style.height = "90vh";
-        container.style.display = "flex";
+        // Hide element till it needs to be shown
+        container.style.display = "none";
         container.style.flexDirection = "column";
 
         container.appendChild(text);
@@ -192,6 +193,10 @@ function playGame() {
 
       toggleFadeOut();
       mainContainer.appendChild(winnerCard);
+      // Trigger fadeIn animation
+      setTimeout(() => {
+        winnerCard.classList.add("enabled");
+      }, 1500);
 
       const playAgainBtn = document.querySelector("#play-again-btn");
       playAgainBtn.addEventListener("click", refreshPage);
