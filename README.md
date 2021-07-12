@@ -2,7 +2,7 @@
 
 Project done for the The Odin Project Foundations course.
 
-## Tecnologies used
+## Technologies used
 
 - HTML
 - CSS
