@@ -6,7 +6,15 @@ function getRandomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function isValidChoice(choice) {
+  return options.includes(choice);
+}
+
 function getComputerChoice() {
   const choice = getRandomInteger(0, 2);
   return options[choice];
+}
+
+function getHumanChoice() {
+  return prompt('Rock, Paper or Scissors?');
 }
