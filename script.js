@@ -1,6 +1,4 @@
 const options = ['Rock', 'Paper', 'Scissors'];
-let computerScore = 0;
-let humanScore = 0;
 
 function getRandomInteger(min, max) {
   min = Math.ceil(min);
@@ -61,6 +59,18 @@ function evaluateRound(humanChoice, computerChoice) {
   }
 }
 
+function evaluateGame(humanScore, computerScore) {
+  if (humanScore === computerScore) {
+    return 'Tie';
+  }
+
+  if (humanScore > computerScore) {
+    return 'Human';
+  }
+
+  return 'Computer';
+}
+
 function printRoundResult(winner, humanChoice, computerChoice) {
   switch (winner) {
     case 'Tie':
@@ -74,19 +84,46 @@ function printRoundResult(winner, humanChoice, computerChoice) {
   }
 }
 
-function incrementScore(winner) {
-  if (winner === 'Human') humanScore++;
-  if (winner === 'Computer') computerScore++;
+function printGameResult(winner, humanScore, computerScore) {
+  switch (winner) {
+    case 'Tie':
+      return `The game ends in a tie! (${humanScore} - ${computerScore})`;
+
+    case 'Human':
+      return `You won! (${humanScore} - ${computerScore})`;
+
+    case 'Computer':
+      return `You lose! (${humanScore} - ${computerScore})`;
+  }
 }
 
-function playRound(humanChoice, computerChoice) {
-  const winner = evaluateRound(humanChoice, computerChoice);
-  const result = printRoundResult(winner, humanChoice, computerChoice);
+function playGame() {
+  let rounds = 0;
+  let computerScore = 0;
+  let humanScore = 0;
+
+  function incrementScore(winner) {
+    if (winner === 'Human') humanScore++;
+    if (winner === 'Computer') computerScore++;
+  }
+
+  function playRound(humanChoice, computerChoice) {
+    const winner = evaluateRound(humanChoice, computerChoice);
+    const result = printRoundResult(winner, humanChoice, computerChoice);
+    console.log(result);
+    incrementScore(winner);
+  }
+
+  while (rounds !== 5) {
+    const humanChoice = getHumanChoice();
+    const computerChoice = getComputerChoice();
+    playRound(humanChoice, computerChoice);
+    rounds++;
+  }
+
+  const winner = evaluateGame(humanScore, computerScore);
+  const result = printGameResult(winner, humanScore, computerScore);
   console.log(result);
-  incrementScore(winner);
 }
 
-const humanChoice = getHumanChoice();
-const computerChoice = getComputerChoice();
-
-playRound(humanChoice, computerChoice);
+playGame();
