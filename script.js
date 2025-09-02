@@ -1,4 +1,9 @@
 const options = ['Rock', 'Paper', 'Scissors'];
+const WINNERS = {
+  TIE: 'Tie',
+  HUMAN: 'Human',
+  COMPUTER: 'Computer',
+};
 
 function getRandomInteger(min, max) {
   min = Math.ceil(min);
@@ -22,7 +27,13 @@ function getComputerChoice() {
 
 function getHumanChoice() {
   const choice = prompt('Rock, Paper or Scissors?');
-  return sanitizeString(choice);
+  const sanitized = sanitizeString(choice);
+
+  if (!isValidChoice(sanitized)) {
+    return getHumanChoice();
+  }
+
+  return sanitized;
 }
 
 function checkIfIsTie(human, computer) {
@@ -31,99 +42,111 @@ function checkIfIsTie(human, computer) {
 
 function evaluateRound(humanChoice, computerChoice) {
   if (checkIfIsTie(humanChoice, computerChoice)) {
-    return 'Tie';
+    return WINNERS.TIE;
   }
 
   if (humanChoice === 'Rock' && computerChoice === 'Paper') {
-    return 'Computer';
+    return WINNERS.COMPUTER;
   }
 
   if (humanChoice === 'Rock' && computerChoice === 'Scissors') {
-    return 'Human';
+    return WINNERS.HUMAN;
   }
 
   if (humanChoice === 'Paper' && computerChoice === 'Rock') {
-    return 'Human';
+    return WINNERS.HUMAN;
   }
 
   if (humanChoice === 'Paper' && computerChoice === 'Scissors') {
-    return 'Computer';
+    return WINNERS.COMPUTER;
   }
 
   if (humanChoice === 'Scissors' && computerChoice === 'Rock') {
-    return 'Computer';
+    return WINNERS.COMPUTER;
   }
 
   if (humanChoice === 'Scissors' && computerChoice === 'Paper') {
-    return 'Human';
+    return WINNERS.HUMAN;
   }
 }
 
 function evaluateGame(humanScore, computerScore) {
   if (humanScore === computerScore) {
-    return 'Tie';
+    return WINNERS.TIE;
   }
 
   if (humanScore > computerScore) {
-    return 'Human';
+    return WINNERS.HUMAN;
   }
 
-  return 'Computer';
+  return WINNERS.COMPUTER;
+}
+
+function printCurrentRound(round) {
+  console.log(`Round: ${round}`);
 }
 
 function printRoundResult(winner, humanChoice, computerChoice) {
   switch (winner) {
-    case 'Tie':
-      return "It's a tie!";
+    case WINNERS.TIE:
+      console.log("It's a tie!");
+      break;
 
-    case 'Human':
-      return `You win! ${humanChoice} beats ${computerChoice}.`;
+    case WINNERS.HUMAN:
+      console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+      break;
 
-    case 'Computer':
-      return `You lose! ${computerChoice} beats ${humanChoice}.`;
+    case WINNERS.COMPUTER:
+      console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+      break;
   }
 }
 
 function printGameResult(winner, humanScore, computerScore) {
   switch (winner) {
-    case 'Tie':
-      return `The game ends in a tie! (${humanScore} - ${computerScore})`;
+    case WINNERS.TIE:
+      console.log(`The game ends in a tie! (${humanScore} - ${computerScore})`);
+      break;
 
-    case 'Human':
-      return `You won! (${humanScore} - ${computerScore})`;
+    case WINNERS.HUMAN:
+      console.log(`You won! (${humanScore} - ${computerScore})`);
+      break;
 
-    case 'Computer':
-      return `You lose! (${humanScore} - ${computerScore})`;
+    case WINNERS.COMPUTER:
+      console.log(`You lose! (${humanScore} - ${computerScore})`);
+      break;
   }
 }
 
 function playGame() {
-  let rounds = 0;
+  let round = 1;
   let computerScore = 0;
   let humanScore = 0;
 
   function incrementScore(winner) {
-    if (winner === 'Human') humanScore++;
-    if (winner === 'Computer') computerScore++;
+    if (winner === WINNERS.HUMAN) humanScore++;
+    if (winner === WINNERS.COMPUTER) computerScore++;
   }
 
   function playRound(humanChoice, computerChoice) {
     const winner = evaluateRound(humanChoice, computerChoice);
-    const result = printRoundResult(winner, humanChoice, computerChoice);
-    console.log(result);
+
+    printRoundResult(winner, humanChoice, computerChoice);
     incrementScore(winner);
   }
 
-  while (rounds !== 5) {
+  while (round !== 6) {
+    printCurrentRound(round);
+
     const humanChoice = getHumanChoice();
     const computerChoice = getComputerChoice();
     playRound(humanChoice, computerChoice);
-    rounds++;
+
+    round++;
   }
 
   const winner = evaluateGame(humanScore, computerScore);
-  const result = printGameResult(winner, humanScore, computerScore);
-  console.log(result);
+  printGameResult(winner, humanScore, computerScore);
 }
 
 playGame();
