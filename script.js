@@ -76,17 +76,19 @@ function printCurrentRound(round) {
 }
 
 function printRoundResult(winner, humanChoice, computerChoice) {
+  const container = document.querySelector('.results');
+
   switch (winner) {
     case WINNERS.TIE:
-      console.log("It's a tie!");
+      container.textContent = "It's a tie!";
       break;
 
     case WINNERS.HUMAN:
-      console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+      container.textContent = `You win! ${humanChoice} beats ${computerChoice}.`;
       break;
 
     case WINNERS.COMPUTER:
-      console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+      container.textContent = `You lose! ${computerChoice} beats ${humanChoice}.`;
       break;
   }
 }
