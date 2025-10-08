@@ -25,17 +25,6 @@ function getComputerChoice() {
   return options[choice];
 }
 
-function getHumanChoice() {
-  const choice = prompt('Rock, Paper or Scissors?');
-  const sanitized = sanitizeString(choice);
-
-  if (!isValidChoice(sanitized)) {
-    return getHumanChoice();
-  }
-
-  return sanitized;
-}
-
 function checkIfIsTie(human, computer) {
   return human === computer;
 }
@@ -123,30 +112,33 @@ function playGame() {
   let computerScore = 0;
   let humanScore = 0;
 
+  const choiceButtons = document.querySelectorAll('.choice-button');
+
+  choiceButtons.forEach((btn) =>
+    btn.addEventListener('click', (e) => playRound(e.target.textContent))
+  );
+
   function incrementScore(winner) {
     if (winner === WINNERS.HUMAN) humanScore++;
     if (winner === WINNERS.COMPUTER) computerScore++;
   }
 
-  function playRound(humanChoice, computerChoice) {
+  function playRound(humanChoice) {
+    const computerChoice = getComputerChoice();
     const winner = evaluateRound(humanChoice, computerChoice);
 
     printRoundResult(winner, humanChoice, computerChoice);
     incrementScore(winner);
   }
 
-  while (round !== 6) {
-    printCurrentRound(round);
+  // while (round !== 6) {
+  // printCurrentRound(round);
 
-    const humanChoice = getHumanChoice();
-    const computerChoice = getComputerChoice();
-    playRound(humanChoice, computerChoice);
+  round++;
+  // }
 
-    round++;
-  }
-
-  const winner = evaluateGame(humanScore, computerScore);
-  printGameResult(winner, humanScore, computerScore);
+  // const winner = evaluateGame(humanScore, computerScore);
+  // printGameResult(winner, humanScore, computerScore);
 }
 
 playGame();
