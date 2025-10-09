@@ -1,0 +1,18 @@
+.modal {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background-color: blue;
+  color: white;
+}
+
+.modal.active {
+  display: flex;
+  flex-direction: column;
+}

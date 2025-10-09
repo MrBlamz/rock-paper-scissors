@@ -59,20 +59,8 @@ function evaluateRound(humanChoice, computerChoice) {
   }
 }
 
-function evaluateGame(humanScore, computerScore) {
-  if (humanScore === computerScore) {
-    return WINNERS.TIE;
-  }
-
-  if (humanScore > computerScore) {
-    return WINNERS.HUMAN;
-  }
-
-  return WINNERS.COMPUTER;
-}
-
-function printCurrentRound(round) {
-  console.log(`Round: ${round}`);
+function checkIfIsGameOver(humanScore, computerScore) {
+  return humanScore === 5 || computerScore === 5;
 }
 
 function printRoundResult(winner, humanChoice, computerChoice) {
@@ -93,24 +81,24 @@ function printRoundResult(winner, humanChoice, computerChoice) {
   }
 }
 
-function printGameResult(winner, humanScore, computerScore) {
-  switch (winner) {
-    case WINNERS.TIE:
-      console.log(`The game ends in a tie! (${humanScore} - ${computerScore})`);
-      break;
+function printGameResult(humanScore, computerScore) {
+  const modal = document.querySelector('.modal');
+  const container = document.querySelector('.modal .container');
+  const h3 = document.createElement('h3');
 
-    case WINNERS.HUMAN:
-      console.log(`You won! (${humanScore} - ${computerScore})`);
-      break;
-
-    case WINNERS.COMPUTER:
-      console.log(`You lose! (${humanScore} - ${computerScore})`);
-      break;
+  if (humanScore === 5) {
+    h3.textContent = `You won! (${humanScore} - ${computerScore})`;
   }
+
+  if (computerScore === 5) {
+    h3.textContent = `You lose! (${humanScore} - ${computerScore})`;
+  }
+
+  container.appendChild(h3);
+  modal.classList.toggle('active');
 }
 
 function playGame() {
-  let round = 1;
   let computerScore = 0;
   let humanScore = 0;
 
@@ -141,16 +129,13 @@ function playGame() {
 
     printRoundResult(winner, humanChoice, computerChoice);
     incrementScore(winner);
+
+    const isGameOver = checkIfIsGameOver(humanScore, computerScore);
+
+    if (isGameOver) {
+      printGameResult(humanScore, computerScore);
+    }
   }
-
-  // while (round !== 6) {
-  // printCurrentRound(round);
-
-  round++;
-  // }
-
-  // const winner = evaluateGame(humanScore, computerScore);
-  // printGameResult(winner, humanScore, computerScore);
 }
 
 playGame();
