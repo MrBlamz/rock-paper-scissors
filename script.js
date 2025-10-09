@@ -121,8 +121,18 @@ function playGame() {
   );
 
   function incrementScore(winner) {
-    if (winner === WINNERS.HUMAN) humanScore++;
-    if (winner === WINNERS.COMPUTER) computerScore++;
+    const playerScoreUiElement = document.querySelector('.score .player');
+    const computerScoreUiElement = document.querySelector('.score .computer');
+
+    if (winner === WINNERS.HUMAN) {
+      humanScore++;
+      playerScoreUiElement.textContent = `Human - ${humanScore}`;
+    }
+
+    if (winner === WINNERS.COMPUTER) {
+      computerScore++;
+      computerScoreUiElement.textContent = `Computer - ${computerScore}`;
+    }
   }
 
   function playRound(humanChoice) {
