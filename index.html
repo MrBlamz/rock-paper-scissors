@@ -4,18 +4,51 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
-    <button class="choice-button">Rock</button>
-    <button class="choice-button">Paper</button>
-    <button class="choice-button">Scissors</button>
-    <div class="results"></div>
-    <div class="score">
-      <h3 class="player">Human - 0</h3>
-      <h3 class="computer">Computer - 0</h3>
-    </div>
+    <header>
+      <h1 class="title">Rock Paper Scissors</h1>
+    </header>
+
+    <main>
+      <div class="scoreboard">
+        <div class="info">
+          <h2 class="info-primary">Choose your hand</h2>
+          <h3 class="info-secondary">First to score 5 points wins</h3>
+        </div>
+        <div class="scores">
+          <div class="container">
+            <div class="hand">❔</div>
+            <p class="score" id="player-score">Player: 0</p>
+          </div>
+          <div class="container">
+            <div class="hand">❔</div>
+            <p class="score" id="computer-score">Computer: 0</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button class="choice-button">✊</button>
+        <button class="choice-button">✋</button>
+        <button class="choice-button">✌</button>
+      </div>
+    </main>
+
+    <footer>Copyright © 2025 MrBlamz</footer>
+
     <div class="modal">
       <h3 class="winner"></h3>
       <button class="reset-btn">Play Again</button>

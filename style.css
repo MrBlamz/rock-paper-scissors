@@ -1,3 +1,134 @@
+/* Box sizing reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margins */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+:root {
+  --color-primary: #0f172a;
+  --color-secondary: #1e293b;
+  --color-text-primary: #f1f5f9;
+  --color-text-secondary: #94a3b8;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Nunito';
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--color-primary);
+  color: var(--color-text-primary);
+}
+
+header .title {
+  font-size: 40px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  flex: 1;
+  gap: 3rem;
+  background-color: var(--color-secondary);
+  color: var(--color-text-primary);
+}
+
+.scoreboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.scoreboard .info {
+  text-align: center;
+}
+
+.scoreboard .info-primary {
+  font-size: 40px;
+}
+
+.scoreboard .info-secondary {
+  font-size: 35px;
+}
+
+.scores {
+  display: flex;
+  margin: 1rem;
+  gap: 5rem;
+}
+
+.scores .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.scores .hand {
+  font-size: 6rem;
+}
+
+.scores .score {
+  font-size: 1.7rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.choice-button {
+  font-family: 'Noto Color Emoji';
+  font-size: 7rem;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  padding: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.choice-button:hover {
+  cursor: pointer;
+  transform: scale(1.15);
+}
+
+footer {
+  padding: 1rem;
+  text-align: center;
+  background-color: var(--color-primary);
+  color: var(--color-text-primary);
+  font-size: 1rem;
+}
+
 .modal {
   width: 100vw;
   height: 100vh;
