@@ -4,20 +4,13 @@ const WINNERS = {
   HUMAN: 'Human',
   COMPUTER: 'Computer',
 };
+let computerScore = 0;
+let humanScore = 0;
 
 function getRandomInteger(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function sanitizeString(string) {
-  const lower = string.toLowerCase();
-  return String(lower).charAt(0).toUpperCase() + String(lower).slice(1);
-}
-
-function isValidChoice(choice) {
-  return options.includes(choice);
 }
 
 function getComputerChoice() {
@@ -81,61 +74,81 @@ function printRoundResult(winner, humanChoice, computerChoice) {
   }
 }
 
-function printGameResult(humanScore, computerScore) {
+function toggleModal() {
   const modal = document.querySelector('.modal');
-  const container = document.querySelector('.modal .container');
-  const h3 = document.createElement('h3');
-
-  if (humanScore === 5) {
-    h3.textContent = `You won! (${humanScore} - ${computerScore})`;
-  }
-
-  if (computerScore === 5) {
-    h3.textContent = `You lose! (${humanScore} - ${computerScore})`;
-  }
-
-  container.appendChild(h3);
   modal.classList.toggle('active');
 }
 
-function playGame() {
-  let computerScore = 0;
-  let humanScore = 0;
+function printGameResult(humanScore, computerScore) {
+  const text = document.querySelector('.modal .winner');
 
+  if (humanScore === 5) {
+    text.textContent = `You won! (${humanScore} - ${computerScore})`;
+  }
+
+  if (computerScore === 5) {
+    text.textContent = `You lose! (${humanScore} - ${computerScore})`;
+  }
+
+  toggleModal();
+}
+
+function incrementScore(winner) {
+  const playerScoreUiElement = document.querySelector('.score .player');
+  const computerScoreUiElement = document.querySelector('.score .computer');
+
+  if (winner === WINNERS.HUMAN) {
+    humanScore++;
+    playerScoreUiElement.textContent = `Human - ${humanScore}`;
+  }
+
+  if (winner === WINNERS.COMPUTER) {
+    computerScore++;
+    computerScoreUiElement.textContent = `Computer - ${computerScore}`;
+  }
+}
+
+function playRound(humanChoice) {
+  const computerChoice = getComputerChoice();
+  const winner = evaluateRound(humanChoice, computerChoice);
+
+  printRoundResult(winner, humanChoice, computerChoice);
+  incrementScore(winner);
+
+  const isGameOver = checkIfIsGameOver(humanScore, computerScore);
+
+  if (isGameOver) {
+    printGameResult(humanScore, computerScore);
+  }
+}
+
+function start() {
   const choiceButtons = document.querySelectorAll('.choice-button');
 
   choiceButtons.forEach((btn) =>
     btn.addEventListener('click', (e) => playRound(e.target.textContent))
   );
+}
 
-  function incrementScore(winner) {
+function reset() {
+  const resetButton = document.querySelector('.reset-btn');
+
+  resetButton.addEventListener('click', () => {
     const playerScoreUiElement = document.querySelector('.score .player');
     const computerScoreUiElement = document.querySelector('.score .computer');
 
-    if (winner === WINNERS.HUMAN) {
-      humanScore++;
-      playerScoreUiElement.textContent = `Human - ${humanScore}`;
-    }
+    humanScore = 0;
+    computerScore = 0;
+    playerScoreUiElement.textContent = `Human - ${humanScore}`;
+    computerScoreUiElement.textContent = `Computer - ${computerScore}`;
 
-    if (winner === WINNERS.COMPUTER) {
-      computerScore++;
-      computerScoreUiElement.textContent = `Computer - ${computerScore}`;
-    }
-  }
-
-  function playRound(humanChoice) {
-    const computerChoice = getComputerChoice();
-    const winner = evaluateRound(humanChoice, computerChoice);
-
-    printRoundResult(winner, humanChoice, computerChoice);
-    incrementScore(winner);
-
-    const isGameOver = checkIfIsGameOver(humanScore, computerScore);
-
-    if (isGameOver) {
-      printGameResult(humanScore, computerScore);
-    }
-  }
+    toggleModal();
+  });
 }
 
-playGame();
+function play() {
+  start();
+  reset();
+}
+
+play();
