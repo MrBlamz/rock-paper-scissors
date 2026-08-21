@@ -151,7 +151,7 @@ function start() {
   const choiceButtons = document.querySelectorAll('.choice-button');
 
   choiceButtons.forEach((btn) =>
-    btn.addEventListener('click', (e) => playRound(e.target.textContent))
+    btn.addEventListener('click', (e) => playRound(e.target.textContent)),
   );
 }
 
@@ -159,8 +159,8 @@ function reset() {
   const resetButton = document.querySelector('.reset-btn');
 
   resetButton.addEventListener('click', () => {
-    const playerScoreUiElement = document.querySelector('.score .player');
-    const computerScoreUiElement = document.querySelector('.score .computer');
+    const playerScoreUiElement = document.getElementById('player-score');
+    const computerScoreUiElement = document.getElementById('computer-score');
 
     humanScore = 0;
     computerScore = 0;
