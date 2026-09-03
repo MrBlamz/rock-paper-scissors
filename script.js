@@ -5,11 +5,11 @@ const CHOICES = {
 };
 const WINNERS = {
   TIE: 'Tie',
-  HUMAN: 'Human',
+  PLAYER: 'Player',
   COMPUTER: 'Computer',
 };
 let computerScore = 0;
-let humanScore = 0;
+let playerScore = 0;
 
 function getRandomInteger(min, max) {
   min = Math.ceil(min);
@@ -24,45 +24,45 @@ function getComputerChoice() {
   return CHOICES[randomKey];
 }
 
-function checkIfIsTie(human, computer) {
-  return human === computer;
+function checkIfIsTie(player, computer) {
+  return player === computer;
 }
 
-function evaluateRound(humanChoice, computerChoice) {
-  if (checkIfIsTie(humanChoice, computerChoice)) {
+function evaluateRound(playerChoice, computerChoice) {
+  if (checkIfIsTie(playerChoice, computerChoice)) {
     return WINNERS.TIE;
   }
 
-  if (humanChoice === CHOICES.ROCK && computerChoice === CHOICES.PAPER) {
+  if (playerChoice === CHOICES.ROCK && computerChoice === CHOICES.PAPER) {
     return WINNERS.COMPUTER;
   }
 
-  if (humanChoice === CHOICES.ROCK && computerChoice === CHOICES.SCISSORS) {
-    return WINNERS.HUMAN;
+  if (playerChoice === CHOICES.ROCK && computerChoice === CHOICES.SCISSORS) {
+    return WINNERS.PLAYER;
   }
 
-  if (humanChoice === CHOICES.PAPER && computerChoice === CHOICES.ROCK) {
-    return WINNERS.HUMAN;
+  if (playerChoice === CHOICES.PAPER && computerChoice === CHOICES.ROCK) {
+    return WINNERS.PLAYER;
   }
 
-  if (humanChoice === CHOICES.PAPER && computerChoice === CHOICES.SCISSORS) {
+  if (playerChoice === CHOICES.PAPER && computerChoice === CHOICES.SCISSORS) {
     return WINNERS.COMPUTER;
   }
 
-  if (humanChoice === CHOICES.SCISSORS && computerChoice === CHOICES.ROCK) {
+  if (playerChoice === CHOICES.SCISSORS && computerChoice === CHOICES.ROCK) {
     return WINNERS.COMPUTER;
   }
 
-  if (humanChoice === CHOICES.SCISSORS && computerChoice === CHOICES.PAPER) {
-    return WINNERS.HUMAN;
+  if (playerChoice === CHOICES.SCISSORS && computerChoice === CHOICES.PAPER) {
+    return WINNERS.PLAYER;
   }
 }
 
-function checkIfIsGameOver(humanScore, computerScore) {
-  return humanScore === 5 || computerScore === 5;
+function checkIfIsGameOver(playerScore, computerScore) {
+  return playerScore === 5 || computerScore === 5;
 }
 
-function updateRoundMessages(winner, humanChoice, computerChoice) {
+function updateRoundMessages(winner, playerChoice, computerChoice) {
   const emojis = {
     '✊': 'Rock',
     '✋': 'Paper',
@@ -75,26 +75,26 @@ function updateRoundMessages(winner, humanChoice, computerChoice) {
   switch (winner) {
     case WINNERS.TIE:
       mainMessage.textContent = "It's a tie!";
-      secondaryMessage.textContent = `${emojis[humanChoice]} ties with ${emojis[computerChoice]}`;
+      secondaryMessage.textContent = `${emojis[playerChoice]} ties with ${emojis[computerChoice]}`;
       break;
 
-    case WINNERS.HUMAN:
+    case WINNERS.PLAYER:
       mainMessage.textContent = 'You win!';
-      secondaryMessage.textContent = `${emojis[humanChoice]} beats ${emojis[computerChoice]}.`;
+      secondaryMessage.textContent = `${emojis[playerChoice]} beats ${emojis[computerChoice]}.`;
       break;
 
     case WINNERS.COMPUTER:
       mainMessage.textContent = 'You lose!';
-      secondaryMessage.textContent = `${emojis[computerChoice]} beats ${emojis[humanChoice]}.`;
+      secondaryMessage.textContent = `${emojis[computerChoice]} beats ${emojis[playerChoice]}.`;
       break;
   }
 }
 
-function updateRoundHands(humanChoice, computerChoice) {
+function updateRoundHands(playerChoice, computerChoice) {
   const playerHand = document.getElementById('player-hand');
   const computerHand = document.getElementById('computer-hand');
 
-  playerHand.textContent = humanChoice;
+  playerHand.textContent = playerChoice;
   computerHand.textContent = computerChoice;
 }
 
@@ -103,15 +103,15 @@ function toggleModal() {
   modal.classList.toggle('active');
 }
 
-function printGameResult(humanScore, computerScore) {
+function printGameResult(playerScore, computerScore) {
   const text = document.querySelector('.modal .winner');
 
-  if (humanScore === 5) {
-    text.textContent = `You won! (${humanScore} - ${computerScore})`;
+  if (playerScore === 5) {
+    text.textContent = `You won! (${playerScore} - ${computerScore})`;
   }
 
   if (computerScore === 5) {
-    text.textContent = `You lose! (${humanScore} - ${computerScore})`;
+    text.textContent = `You lose! (${playerScore} - ${computerScore})`;
   }
 
   toggleModal();
@@ -121,9 +121,9 @@ function updateScore(winner) {
   const playerScoreUiElement = document.getElementById('player-score');
   const computerScoreUiElement = document.getElementById('computer-score');
 
-  if (winner === WINNERS.HUMAN) {
-    humanScore++;
-    playerScoreUiElement.textContent = `Player: ${humanScore}`;
+  if (winner === WINNERS.PLAYER) {
+    playerScore++;
+    playerScoreUiElement.textContent = `Player: ${playerScore}`;
   }
 
   if (winner === WINNERS.COMPUTER) {
@@ -132,18 +132,18 @@ function updateScore(winner) {
   }
 }
 
-function playRound(humanChoice) {
+function playRound(playerChoice) {
   const computerChoice = getComputerChoice();
-  const winner = evaluateRound(humanChoice, computerChoice);
+  const winner = evaluateRound(playerChoice, computerChoice);
 
-  updateRoundMessages(winner, humanChoice, computerChoice);
-  updateRoundHands(humanChoice, computerChoice);
+  updateRoundMessages(winner, playerChoice, computerChoice);
+  updateRoundHands(playerChoice, computerChoice);
   updateScore(winner);
 
-  const isGameOver = checkIfIsGameOver(humanScore, computerScore);
+  const isGameOver = checkIfIsGameOver(playerScore, computerScore);
 
   if (isGameOver) {
-    printGameResult(humanScore, computerScore);
+    printGameResult(playerScore, computerScore);
   }
 }
 
@@ -155,18 +155,31 @@ function start() {
   );
 }
 
+function resetUI() {
+  const unknownHand = '❔';
+  const infoPrimary = document.querySelector('.info-primary');
+  const infoSecondary = document.querySelector('.info-secondary');
+  const playerHand = document.querySelector('#player-hand');
+  const computerHand = document.querySelector('#computer-hand');
+  const playerScoreUiElement = document.getElementById('player-score');
+  const computerScoreUiElement = document.getElementById('computer-score');
+
+  infoPrimary.textContent = 'Choose your hand';
+  infoSecondary.textContent = 'First to score 5 points wins';
+  playerHand.textContent = unknownHand;
+  computerHand.textContent = unknownHand;
+  playerScoreUiElement.textContent = `Player: ${playerScore}`;
+  computerScoreUiElement.textContent = `Computer: ${computerScore}`;
+}
+
 function reset() {
   const resetButton = document.querySelector('.reset-btn');
 
   resetButton.addEventListener('click', () => {
-    const playerScoreUiElement = document.getElementById('player-score');
-    const computerScoreUiElement = document.getElementById('computer-score');
-
-    humanScore = 0;
+    playerScore = 0;
     computerScore = 0;
-    playerScoreUiElement.textContent = `Human - ${humanScore}`;
-    computerScoreUiElement.textContent = `Computer - ${computerScore}`;
 
+    resetUI();
     toggleModal();
   });
 }
